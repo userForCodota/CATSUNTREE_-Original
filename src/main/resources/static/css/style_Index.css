@@ -1,3 +1,89 @@
-body{
-    background: url("../images/lv_1920X900.png");
+/*使得按钮垂直水平居中*/
+#btn01 {
+    width: 126px;
+    height: 38px;
+    position: absolute;
+    left: 55%;
+    top: 75%;
+    margin-left: -200px;
+    margin-top: -150px;
+}
+
+/*右长条1*/
+#showPanel01 {
+    width: 15px;
+    height: 500px;
+    border-radius: 10px;
+    position: fixed;
+    right: 5px;
+    top: 5px;
+    background-color: #007DDB;
+}
+
+/*右长条2*/
+#showPanel02 {
+    width: 15px;
+    height: 200px;
+    border-radius: 10px;
+    position: fixed;
+    right: 5px;
+    top: 510px;
+    background-color: #db2c29;
+}
+
+/*右长条1对应的JDBC设置区*/
+#JDBC_Info {
+    width: 800px;
+    height: 500px;
+    border-radius: 10px;
+    position: fixed;
+    right: 21px;
+    top: 5px;
+    background-color: #e3dfce;
+}
+
+/*的JDBC设置区微调*/
+#JDBC_Info div {
+    margin-bottom: 1px;
+}
+
+/*form表单1里面的2个div*/
+.aaa {
+    /*border: solid red;*/
+    display: inline-block;
+}
+
+/*form表单1里面的2个div之一：按钮组*/
+#JDBC_Info_buttonGroup {
+    width: auto;
+    float: left;
+}
+
+/*form表单1里面的2个div之一：文字区DIV，需要根据JDBC_Info_buttonGroup的宽度来设置*/
+#JDBC_Info_TextareaDIV {
+    /*填充剩余的空间*/
+    width: calc(100% - 64px);
+    height: calc(100% - 10px);
+    float: left;
+}
+
+/*form表单1里面的2个div之一：文字区DIV下的文字区，受JDBC_Info_TextareaDIV限制*/
+#JDBC_Info_Textarea {
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+    resize: none;
+    font-size: 25px;
+    border-radius: 10px;
+}
+
+/*树属性区，对应#showPanel02*/
+#treeProperties {
+    width: 700px;
+    height: 200px;
+    border-radius: 10px;
+    position: fixed;
+    right: 21px;
+    top: 510px;
+    background-color: #2bdb42;
 }
