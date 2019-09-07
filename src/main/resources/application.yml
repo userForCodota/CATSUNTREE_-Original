@@ -1,9 +1,12 @@
+#配置SpringBoot
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/dororo?serverTimezone=UTC
     data-username: root
     data-password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
+#  mvc:
+#    static-path-pattern: /static/**
 server:
   port: 8093
 mybatis:
