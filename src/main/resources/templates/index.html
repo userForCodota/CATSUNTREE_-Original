@@ -10,6 +10,8 @@
     <script src="../static/framework/layui-v2.5.4/layui/layui.js"></script>
     <script src="../static/framework/zTree_v3-master/js/jquery.ztree.all.js"></script>
     <script src="../static/js/js_Index_animation.js"></script>
+    <script src="../static/js/js_Index_event.js"></script>
+    <script src="../static/js/js_Index_connDataBase.js"></script>
 </head>
 <body>
 <div>
@@ -22,30 +24,54 @@
     <div>
         <button id="btn01" type="button" class="layui-btn layui-btn-radius">Hello World™!</button>
     </div>
+    <div id="loadingTips"><i class="layui-icon layui-anim layui-anim-rotate layui-anim-loop">&#xe63d;</i></div>
     <div id="showPanel01" class="panel panel01"></div>
     <div id="showPanel02" class="panel panel02"></div>
     <div id="JDBC_Info" class="panel01">
         <form class="layui-form" action="" style="width: 100%;height: 100%; padding-top: 2px">
-            <div class="aaa" id="JDBC_Info_buttonGroup">
+            <div class="ibk" id="JDBC_Info_buttonGroup">
                 <div class="layui-form-item">
                     <button type="reset" class="layui-btn layui-bg-black" title="重置"><i class="layui-icon">&#xe669;</i>
                     </button>
                 </div>
-                <div class="layui-form-item">
+                <div class="layui-form-item" id="jsonCheck">
                     <button type="button" class="layui-btn layui-bg-orange" title="JSON格式校验"><i class="layui-icon">&#xe64c;</i>
                     </button>
                 </div>
                 <div class="layui-form-item">
-                    <button type="button" class="layui-btn" title="获取"><i class="layui-icon">&#xe615;</i></button>
+                    <button type="button" class="layui-btn" title="获取" id="connDB"><i class="layui-icon">&#xe615;</i>
+                    </button>
                 </div>
             </div>
-            <div class="aaa" id="JDBC_Info_TextareaDIV">
-                <textarea id="JDBC_Info_Textarea"></textarea>
+            <div class="ibk" id="JDBC_Info_TextareaDIV">
+                <textarea id="JDBC_Info_Textarea" placeholder=""></textarea>
             </div>
         </form>
     </div>
     <div id="treeProperties" class="panel02">
+        <form class="layui-form" action="" style="width: 100%;height: 100%; padding-top: 2px">
+            <div class="layui-form-item">
+                <select name="cid" lay-verify="required">
+                    <option value="">请选择栏目ID</option>
+                </select>
+            </div>
 
+            <div class="layui-form-item">
+                <select name="pcid" lay-verify="required">
+                    <option value="">请选择父栏目ID</option>
+                </select>
+            </div>
+
+            <div class="layui-form-item">
+                <select name="cname" lay-verify="required">
+                    <option value="">请选择栏目名称</option>
+                </select>
+            </div>
+            <div class="layui-form-item" style="text-align: center">
+                <button type="button" class="layui-btn" title="重置"><i class="layui-icon">提交</i>
+                </button>
+            </div>
+        </form>
     </div>
 </div>
 </body>
