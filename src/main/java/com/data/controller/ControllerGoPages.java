@@ -13,8 +13,12 @@ public class ControllerGoPages {
 
     @RequestMapping("/go")
     public String goIndex() {
-        return "index";
+        return "NewIndex";
     }
 
+    @RequestMapping("/dbinfo")
+    public String goDbinfo() {
+        return "DBinfo";
+    }
 
 }

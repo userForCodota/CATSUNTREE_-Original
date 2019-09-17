@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/framework/layui-v2.5.4/layui/css/layui.css">
+    <link rel="stylesheet" href="../static/css/DBinfo_basic.css">
+    <script src="../static/framework/Jquery/jquery-3.4.1.js"></script>
+    <script src="../static/framework/layui-v2.5.4/layui/layui.js"></script>
+    <script src="../static/js/dbinfo_ajax.js"></script>
+</head>
+<body>
+<div id="mainboardParent">
+    <div id="mainboard">
+        <form class="layui-form layui-form-pane" action="">
+            <div class="layui-form-item" id="bbbbbbbb">
+                <div class="layui-inline" id="aaaaaaaa">
+                    <label class="layui-form-label">输入框</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" required lay-verify="required" placeholder="请输入服务器信息"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                </div>
+                <div class="layui-inline">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">单选框</label>
+                <div class="layui-inline">
+                    <select id="selectdb" name="city" lay-verify="" lay-search lay-filter="selectdb">
+                        <option value=""></option>
+                        <option value="010">北京</option>
+                        <option value="021">上海</option>
+                        <option value="0571">杭州</option>
+                        <option value="0571">channel</option>
+                    </select>
+                </div>
+                <div class="layui-inline">
+                    <select name="city" lay-verify="">
+                        <option value=""></option>
+                        <option value="010">北京</option>
+                        <option value="021">上海</option>
+                        <option value="0571">杭州</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

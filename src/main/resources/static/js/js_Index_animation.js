@@ -19,11 +19,11 @@ $(function () {
             "※ 可以给完整url添加参数，例如：\n" +
             "※ \"dbname\": \"gzszf?serverTimezone=UTC\"\n";
         var jdbcexample = "{\n" +
-            "\t\"url\": \"jdbc:mysql://localhost:3306/\",\n" +
-            "\t\"dbname\": \"dororo?serverTimezone=UTC\",\n" +
-            "\t\"username\": \"root\",\n" +
-            "\t\"password\": \"root\",\n" +
-            "\t\"sql\": \"select * from channel\"\n" +
+            "\"url\": \"jdbc:mysql://localhost:3306/\",\n" +
+            "\"dbname\": \"dororo?serverTimezone=UTC\",\n" +
+            "\"username\": \"root\",\n" +
+            "\"password\": \"root\",\n" +
+            "\"sql\": \"select * from channel\"\n" +
             "}";
         // $('#bgPic').fadeOut(500);//背景图是否隐藏
         $('#btn01').fadeOut(500);

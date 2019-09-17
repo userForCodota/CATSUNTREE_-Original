@@ -1,0 +1,93 @@
+/*首页的基础css（非测试）*/
+body {
+    background-image: url("../images/green1920X936_V2.png");
+    /*background-size: cover;*/
+}
+
+.jdbczoon {
+    /*防止父级塌陷*/
+    overflow: auto;
+    height: 400px;
+    width: 60%;
+    position: fixed;
+    right: 0px;
+    top: 10px;
+    margin: 0px;
+    padding: 1px;
+}
+
+#jdbczoon > div {
+    float: right;
+    margin: 0px;
+}
+
+/*layui按钮组，经测试宽度60px比较合适*/
+#c1 {
+    height: 99%;
+    width: 60px;
+    display: none;
+}
+
+#c2 {
+    height: 99%;
+    float: right;
+    /*width: calc(100% - A);A的值需要大于c1和c2的宽之和防止浮动被挤压出去*/
+    width: calc(100% - 120px);
+    display: none;
+    padding: 0px;
+    text-align: center;
+}
+
+/*可调节的显示条宽度大小*/
+#c3 {
+    height: 340px;
+    width: 30px;
+    border-radius: 6px;
+    background-color: #007DDB;
+    /*透明度*/
+    /*opacity: 0.15;*/
+}
+
+#c2 > div {
+    margin: 0px;
+    width: 100%;
+}
+
+/*textarea父div*/
+#c2 > div:nth-child(1) {
+    height: calc(100% - 60px);
+    text-align: center;
+}
+
+/*textarea下方按钮组父div*/
+#c2 > div:nth-child(2) {
+    width: 99%;
+    height: 40px;
+    text-align: center;
+    /*background-color: white;*/
+    /*border: #0C0C0C 1px solid;*/
+    padding: 2px;
+    border-radius: 6px;
+}
+
+#c2 > div:nth-child(1) > textarea {
+    margin: 0px;
+    width: 99%;
+    height: 99%;
+    /*禁止缩放*/
+    resize: none;
+    /*border: #0b0ca6 2px solid;*/
+    border-radius: 10px;
+    /*首行缩进*/
+    /*text-indent: 25px;*/
+    font-size: 25px;
+}
+
+#c1 > form > div > div {
+    margin: 1px;
+}
+
+#c1 button[title='获取'] {
+    height: 150px;
+    margin-top: 5px;
+}

@@ -1,0 +1,8 @@
+/*测试阶段用到css*/
+#jdbczoon {
+    border: #1113a6 1px solid;
+}
+
+#jdbczoon > div {
+    border: red solid 1px;
+}
