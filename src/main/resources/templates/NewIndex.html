@@ -13,7 +13,7 @@
     <script src="../static/js/NewIndex_functionJDBC.js"></script>
 </head>
 <body>
-<div class="jdbczoon" id="jdbczoonPlaceholder"></div>
+<!--<div class="jdbczoon" id="jdbczoonPlaceholder"></div>-->
 <div class="jdbczoon" id="jdbczoon">
     <!--    显示条 start-->
     <div id="c3"></div>
@@ -30,13 +30,13 @@
                         <button type="button" class="layui-btn layui-btn-fluid" id="showAllTables">查看数据库中所有的tables
                         </button>
                     </div>
-                    <!--                    <div class="layui-inline">
-                                            <div class="layui-btn-group">
-                                                <button type="button" class="layui-btn">增加</button>
-                                                <button type="button" class="layui-btn">编辑</button>
-                                                <button type="button" class="layui-btn">删除</button>
-                                            </div>
-                                        </div>-->
+                    <div class="layui-inline">
+                        <div class="layui-btn-group">
+                            <button type="button" class="layui-btn"><i class="layui-icon layui-icon-rate-solid"></i></button>
+                            <button type="button" class="layui-btn"><i class="layui-icon layui-icon-face-smile"></i></button>
+                            <button type="button" class="layui-btn"><i class="layui-icon layui-icon-component"></i></button>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
@@ -70,5 +70,7 @@
     </div>
     <!--    外部按钮组区 end-->
 </div>
+<button id="welcomebtn" type="button" class="layui-btn layui-btn-fluid">StartUp</button>
+<input id="hideproperties" type="hidden" value="">
 </body>
 </html>

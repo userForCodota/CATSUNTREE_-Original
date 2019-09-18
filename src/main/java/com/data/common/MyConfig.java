@@ -5,7 +5,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * 本类是为了解决静态资源被拦截而创建的配置类，改写的目标是mvc的拦截，增加扫描的路径
+ * 本类是为了解决静态资源被拦截而创建的配置类，改写的目标是给mvc的拦截配置增加扫描的路径
  */
 @Configuration
 public class MyConfig implements WebMvcConfigurer {

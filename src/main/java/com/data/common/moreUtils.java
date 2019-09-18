@@ -3,6 +3,8 @@ package com.data.common;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +16,8 @@ import java.util.regex.Pattern;
  */
 public class moreUtils {
     /**
+     * 本方法用于处理前端传回的JSON是多行字符串的时候，将换行符替换掉。
+     *
      * @param jsonStr 长得像JSON的字符串，通常由前端JSON对象传回
      * @return
      */
@@ -38,6 +42,14 @@ public class moreUtils {
         return jbt;
     }
 
+    /**
+     * 本方法用于将ztree需要用到的状态码、反馈信息、栏目列表数据等对象都合并成一个map对象，最终转成json字符串
+     *
+     * @param status 状态码
+     * @param msg    反馈信息
+     * @param list   栏目列表数据
+     * @return json字符串
+     */
     public static String unionDatas(int status, String msg, List<Map<String, Object>> list) {
         String listStr = JSON.toJSONString(list);
         Map<String, Object> tempMap = new HashMap<>();
@@ -50,11 +62,12 @@ public class moreUtils {
     }
 
 
-    public static String checkIDBCInfo(JSONObject jsonObject) {
-        String jdbcInfoException = null;
-
-
-
-        return jdbcInfoException;
+    /**
+     * 此方法只是在普通的System.out.println()方法基础上加上了系统时间
+     *
+     * @param soutMsg 需要打印的信息
+     */
+    public static void soutPro(String soutMsg) {
+        System.out.println("[" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + "]" + "\t" + soutMsg);//合起来写
     }
 }
