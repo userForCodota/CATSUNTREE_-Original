@@ -27,7 +27,7 @@ $(function () {
     $("button[title='JSON格式校验']").click(function () {
         layui.use('layer', function () {
             layer.confirm('是否打开？', {
-                time: 20000, //20s后自动关闭
+                time: 2500, //20s后自动关闭
                 btn: ['是的', '下次']
             }, function () {
                 window.open("http://www.bejson.com/")
@@ -37,24 +37,22 @@ $(function () {
     });
     //textarea清除
     $("#cleanJDBCtextarea").click(function () {
-        var layer;
-        layui.use('layer', function () {
-            layer = layui.layer;
-        });
         $("#c2 textarea").val("");
-        layer.msg("已清空");
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            layer.msg("已清空");
+        });
+
     });
 
     //textarea重置
     $("#resetJDBCtextarea").click(function () {
-        var propertiesString = $("#hideproperties").val();
+        var propertiesString = $("#hideproperties").val();//读取隐藏域值
         fillJDBCtextarea(propertiesString);//调用其他JS的函数
         layui.use('layer', function () {
             var layer = layui.layer;
             layer.msg("已重置");
         });
-
-
     });
 
     //点击打开“展示所有数据库和表信息”的页面

@@ -16,6 +16,7 @@ $(function () {
                     showBodyBackgroundImage(data);
                     //填充JDBC区
                     fillJDBCtextarea(data);
+                    //是否需要存进cookie
                 }
             }
         },
@@ -24,7 +25,7 @@ $(function () {
         }
     });
 });//end jquery
-//######################################功能性函数写在$()之外、js之内,待文档加载完成后被$()内调用#############################
+//######################################功能性函数写在$()之外、js之内,待文档加载完成后被$()#############################
 //是否展示背景图片
 function showBodyBackgroundImage(JSONString) {
     var jsonObj = JSON.parse(JSONString);
