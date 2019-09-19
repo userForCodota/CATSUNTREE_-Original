@@ -15,12 +15,12 @@ function loadProperties() {
             // 后台已经是返回json字符串格式的data，放首页#hideproperties的input进行储存,其他地方或js要用到的话JSON.parse()着用
             if (data != null) {
                 if (data.trim() != "{}") {
-                    $("#hideproperties").val("");//清空后赋值
-                    $("#hideproperties").val(data);
+                    // $("#hideproperties").val("");//清空后赋值
+                    // $("#hideproperties").val(data);
+                    global_properties = data;//使用全局变量储存
                     //是否展示背景图
                     showBodyBackgroundImage(data);
-                    //取出其中关于JDBC的属性字符串，填充JDBC区
-                    //拿到配置文件字符串
+                    //取出其中关于JDBC的属性字符串，填充JDBC区//拿到配置文件字符串
                     var jsonObj = JSON.parse(data);
                     //取出关于jdbc的属性，按照属性文件的设计，此处还是json字符串
                     var basicjdbcString = jsonObj.basicjdbc;

@@ -52,7 +52,8 @@ $(function () {
     $("#resetJDBCtextarea").click(function () {
         layui.use('layer', function () {
             var layer = layui.layer;
-            var propertiesString = $("#hideproperties").val();//读取隐藏域值
+            // var propertiesString = $("#hideproperties").val();//读取隐藏域值
+            var propertiesString = global_properties;//重全局变量读取
             if (propertiesString != null && propertiesString.trim() != "") {
                 var proObj = JSON.parse(propertiesString);
                 var basicjdbcString = proObj.basicjdbc;//拿到的是JSON格式的字符串
