@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -31,7 +32,7 @@ public class ControllerGetProperties {
         try {
             fi = new FileInputStream("..\\config\\tree.properties");//加载的是外部属性文件
             props.load(fi);
-            //迭代
+            //迭代读取数据并存储
             Iterator<Map.Entry<Object, Object>> it = props.entrySet().iterator();
             while (it.hasNext()) {
                 Map.Entry<Object, Object> entry = it.next();//每个entry包含一组K-V
@@ -49,6 +50,8 @@ public class ControllerGetProperties {
         } catch (IOException e) {
             //e.printStackTrace();
             moreUtils.soutPro("加载属性文件时发生错误。" + e.getMessage());
+        } finally {
+            //?
         }
         //最终利用fastjson将map对象转JSON字符串
         mapstring = JSON.toJSONString(propsmap);
