@@ -9,6 +9,7 @@ import com.data.entity.JDBCInfo;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.SQLSyntaxErrorException;
 import java.util.List;
 import java.util.Map;
 
@@ -28,7 +29,7 @@ public class serviceAskTreeData {
     public String dealTreedataRequest(String jdbcJsonStringAfterValidate) {
         sb = new StringBuffer();//用于拼接异常信息
         try {
-            //首先尝试解析是否能转成JSON对象,可能有异常
+            //首先尝试解析是否能转成JSON对象,可能有异常在catch处捕获
             JSONObject jsonObject = JSONObject.parseObject(jdbcJsonStringAfterValidate);
             if (jsonObject != null) {
                 //将json对象优化处理为实体类,并记录信息
@@ -42,12 +43,19 @@ public class serviceAskTreeData {
                         List<Map<String, Object>> list = (List<Map<String, Object>>) tabledatas.get("list");
                         List<String> columnnames = (List<String>) tabledatas.get("columnnames");
                         int columncount = Integer.parseInt(tabledatas.get("columncount").toString());
-                        return moreUtils.unionDatasPro(1, sb.toString(), list, columnnames, columncount);
+                        //最终正确的数据
+                        return moreUtils.unionDatasPro(1, sb.append("查询成功").toString(), list, columnnames, columncount);
+                    } catch (SQLSyntaxErrorException e) {
+                        sb.append(e.getMessage());
+                        moreUtils.soutPro("执行sql查询时发生错误：" + e.getMessage());
                     } catch (SQLException e) {
                         //conn正确但是异常，说明是sql的问题
-                        moreUtils.soutPro("执行sql查询时发生错误：" + e.getMessage());
                         sb.append(e.getMessage());
-                        e.printStackTrace();
+                        moreUtils.soutPro("执行sql查询时发生错误：" + e.getMessage());
+                        return moreUtils.unionDatas(0, sb.toString(), null);
+                    } catch (Exception e) {
+                        sb.append(e.getMessage());
+                        moreUtils.soutPro("执行sql查询时发生错误：" + e.getMessage());
                         return moreUtils.unionDatas(0, sb.toString(), null);
                     }
                 } else {
@@ -56,13 +64,10 @@ public class serviceAskTreeData {
             }
         } catch (JSONException e) {
             //JSONException是fastjson对应的异常，已导包
-            sb.append(e.getMessage() + "properties can't parse into jsonObject");
+            sb.append("尝试转换JSON对象时异常。信息:" + e.getMessage());
             return moreUtils.unionDatas(-1, sb.toString(), null);
-        } finally {
-
         }
-
-        return "error";
+        return moreUtils.unionDatas(-9999, sb.toString(), null);
     }
 
 
@@ -78,12 +83,12 @@ public class serviceAskTreeData {
         String password = jsonObject.getString("password");
         String sql = jsonObject.getString("sql");
         if (url == null || url.equals("")) {
-            sb.append("url" + "不能为空\\|");
+            sb.append("key=" + "url" + "不存在或对应value为空|");
         } else {
             jo.setUrl(url);
         }
         if (dbname == null || dbname.equals("")) {
-            sb.append("dbname" + "不能为空\\|");
+            sb.append("key=" + "dbname" + "不存在或对应value为空|");
         } else {
             jo.setDbname(dbname);
         }
@@ -94,17 +99,17 @@ public class serviceAskTreeData {
             jo.setParameter(parameter);
         }
         if (username == null || username.equals("")) {
-            sb.append("username" + "不能为空\\|");
+            sb.append("key=" + "username" + "不存在或对应value为空|");
         } else {
             jo.setUsername(username);
         }
         if (password == null || password.equals("")) {
-            sb.append("password" + "不能为空\\|");
+            sb.append("key=" + "password" + "不存在或对应value为空|");
         } else {
             jo.setPassword(password);
         }
         if (sql == null || sql.equals("")) {
-            sb.append("sql" + "不能为空\\|");
+            sb.append("key=" + "sql" + "不存在或对应value为空|");
         } else {
             jo.setSql(sql);
         }

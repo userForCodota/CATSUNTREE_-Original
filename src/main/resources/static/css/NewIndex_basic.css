@@ -108,3 +108,12 @@ body {
     margin-top: -100px;
     display: none;
 }
+
+/*进度条相关*/
+#layuiBar {
+    background-color: #84959A;
+    display: none;
+    position: fixed;
+    width: 100%;
+    top: 0px;
+}

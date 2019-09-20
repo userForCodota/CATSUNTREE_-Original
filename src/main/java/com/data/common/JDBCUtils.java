@@ -2,6 +2,7 @@ package com.data.common;
 
 import com.alibaba.fastjson.JSONObject;
 import com.data.entity.JDBCInfo;
+import com.mysql.cj.jdbc.exceptions.CommunicationsException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -87,11 +88,15 @@ public class JDBCUtils {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(jio.getUrl() + jio.getDbname() + jio.getParameter(), jio.getUsername(), jio.getPassword());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        } catch (CommunicationsException e) {
+//            e.printStackTrace();
+            sb.append(e.getMessage().replaceAll("\n", "|"));
+            moreUtils.soutPro("getConnection()获取连接时发生错误，错误信息：" + sb.toString());
             sb.append(e.getMessage());
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+//            e.printStackTrace();
+            sb.append(e.getMessage().replaceAll("\n", "|"));
+            moreUtils.soutPro("尝试获取数据库连接时发生错误，信息：" + sb.toString());
             sb.append(e.getMessage());
         }
         return conn;

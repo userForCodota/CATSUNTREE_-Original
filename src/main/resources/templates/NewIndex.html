@@ -15,7 +15,11 @@
     <script src="../static/js/NewIndex_BuildTree.js"></script>
 </head>
 <body>
-<!--<div class="jdbczoon" id="jdbczoonPlaceholder"></div>-->
+<!--进度条-->
+<div id="layuiBar" class="layui-progress" lay-filter="demo" lay-showPercent="true">
+    <div class="layui-progress-bar layui-bg-orange" lay-percent="70%"></div>
+</div>
+<!--JDBC核心区-->
 <div class="jdbczoon" id="jdbczoon">
     <!--    显示条 start-->
     <div id="c3"></div>
@@ -72,9 +76,9 @@
     </div>
     <!--外部按钮组区 end-->
 </div>
+<!--功能组件-->
 <button id="welcomebtn" type="button" class="layui-btn layui-btn-fluid">StartUp</button>
-<!--<input id="hideproperties" type="hidden" value="">-->
-<!--<input id="hideTreeData" type="hidden" value="">-->
-<input type="button" value="测试按钮" id="testbtn">
+
+
 </body>
 </html>

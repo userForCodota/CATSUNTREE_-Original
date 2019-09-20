@@ -15,7 +15,8 @@ public class jsonTests {
 
     @Test
     public void testfunc() {
-        String a = "{\"url\":\"jdbc:mysql://139.129.67.219:3306/\",\"dbname\":\"zhstjj\",\"parameter\":\"?serverTimezone=UTC\",\"username\":\"zhsdevelop\",\"password\":\"southnet\",\"sql\":\"select * from channel\"}";
+//        String a = "{\"url\":\"jdbc:mysql://localhost:3306/\",\"dbname\":\"zhssjj\",\"parameter\":\"?serverTimezone=UTC\",\"username\":\"root\",\"password\":\"root\",\"sql\":\"select * from people\"}";
+        String a = "{\"url\":\"jdbc:mysql://139.129.67.219:3306/\",\"dbname\":\"zhssjj\",\"parameter\":\"?serverTimezone=UTC\",\"username\":\"root\",\"password\":\"123456a?\",\"sql\":\"select * from channel\"}";
         serviceAskTreeData aaaa = new serviceAskTreeData();
         String s = aaaa.dealTreedataRequest(a);
         System.out.println(s);

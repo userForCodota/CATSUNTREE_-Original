@@ -88,4 +88,118 @@ $(function () {
             });
         });
     });
-});
+});//end jquery
+
+//为ajax发生请求时写的交互 N个
+//（1）按钮禁用
+function Submitdisable() {
+    //参考 <i class="layui-icon layui-anim layui-anim-rotate layui-anim-loop" id="treerequestloading">&#xe63d;</i>
+    $("#connDB").addClass("layui-btn-disabled");//禁用
+    $("#connDB").removeClass("layui-bg-blue");//去掉颜色
+    $("#connDB>i").html("&#xe63d;");//换成加载的图标
+    //追加循环旋转的css
+    $("#connDB").addClass("layui-bg-black");//换颜色
+    $("#connDB>i").addClass("layui-anim");
+    $("#connDB>i").addClass("layui-anim-rotate");
+    $("#connDB>i").addClass("layui-anim-loop");
+}
+
+//（2）恢复按钮原样
+function Submitrestore() {
+    $("#connDB").removeClass("layui-btn-disabled");//取消禁用
+    $("#connDB").removeClass("layui-bg-black");//换颜色
+    $("#connDB").addClass("layui-bg-blue");//换颜色
+    $("#connDB>i").html("&#xe615;");//换成正常的图标
+    // 去掉动画
+    $("#connDB>i").removeClass("layui-anim");
+    $("#connDB>i").removeClass("layui-anim-rotate");
+    $("#connDB>i").removeClass("layui-anim-loop");
+}
+
+//(3)ajax执行成功时按钮的特殊提示
+function submitdone() {
+    $("#connDB>i").html("&#xe6c6;");//换成大拇指图标（&#xe6c6;）/钩（&#x1005;）
+    // 去掉动画
+    $("#connDB>i").removeClass("layui-anim");
+    $("#connDB>i").removeClass("layui-anim-rotate");
+    $("#connDB>i").removeClass("layui-anim-loop");
+    $("#connDB").removeClass("layui-bg-black");//换颜色
+    $("#connDB").addClass("layui-bg-orange");//换颜色
+    //等待1秒后图标再恢复正常
+    setTimeout('submitdone_I()', 1000);
+}
+
+function submitdone_I() {
+    $("#connDB").removeClass("layui-bg-orange");//换颜色
+    $("#connDB").addClass("layui-bg-blue");//换颜色
+    $("#connDB>i").html("&#xe615;");//换成正常的图标
+    $("#connDB").removeClass("layui-btn-disabled");//取消禁用
+}
+
+//一个简单的获取当前系统时间并格式化的函数
+function CurentTime() {
+    var now = new Date();
+    var year = now.getFullYear(); //年
+    var month = now.getMonth() + 1; //月
+    var day = now.getDate(); //日
+    var hh = now.getHours(); //时
+    var mm = now.getMinutes(); //分
+    var clock = year + "-";
+    if (month < 10)
+        clock += "0";
+    clock += month + "-";
+    if (day < 10)
+        clock += "0";
+    clock += day + " ";
+    if (hh < 10)
+        clock += "0";
+    clock += hh + ":";
+    if (mm < 10) clock += '0';
+    clock += mm;
+    return (clock);
+}
+
+//显示
+function barshow() {
+    $("#layuiBar").show(function () {
+        layui.use('element', function () {
+            // 这里引用模块纯粹是为了让模块效果处来
+            var element = layui.element;
+        });
+    });
+}
+
+//拉满
+function barFull_I() {
+    setTimeout("barFull_II()", 150);
+    setTimeout("barFull_III()", 2000);
+}
+
+function barFull_II() {
+    layui.use('element', function () {
+        var element = layui.element;
+        element.progress('demo', '100%');
+    });
+}
+
+function barFull_III() {
+    $("#layuiBar").fadeOut();
+    layui.use('element', function () {
+        var element = layui.element;
+        element.progress('demo', '70%');
+    });
+    $("#layuiBar").css("display", "none");
+}
+
+//归零
+function barZero() {
+    setTimeout('barZero_I()', 300);
+}
+
+function barZero_I() {
+    layui.use('element', function () {
+        var element = layui.element;
+        element.progress('demo', '0%');
+    });
+    $("#layuiBar").fadeOut(1000);
+}
