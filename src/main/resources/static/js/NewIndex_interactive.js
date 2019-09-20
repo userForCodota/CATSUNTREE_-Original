@@ -64,7 +64,7 @@ $(function () {
                     layer.msg("已尝试重置，然而属性文件无相关内容");
                 }
             } else {
-                var exampleJDBC = "{\"url\":\"jdbc:mysql://139.129.67.219:3306/\",\"dbname\":\"dgshjj\",\"parameter\":\"?serverTimezone=UTC\",\"username\":\"zhsdevelop\",\"password\":\"southnet\",\"sql\":\"select * from channel\"}";
+                var exampleJDBC = "{\"url\":\"jdbc:mysql://139.129.67.219:3306/\",\"dbname\":\"zhstjj\",\"parameter\":\"?serverTimezone=UTC\",\"username\":\"zhsdevelop\",\"password\":\"southnet\",\"sql\":\"select * from channel\"}";
                 fillJDBCtextarea(exampleJDBC);
                 layer.tips('找不到属性文件或属性文件为空，已使用示例配置', '#resetJDBCtextarea', {
                     tips: [4, '#564bba']

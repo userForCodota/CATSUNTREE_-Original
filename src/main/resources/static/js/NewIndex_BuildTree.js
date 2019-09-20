@@ -17,10 +17,10 @@ $(function () {
 function queryTreeData(jdbcJsonStringAfterValidate) {
     // 启动ajax
     $.ajax({
-        url: "/queryDB",
+        url: "/queryTreeData",
         Type: "post",
         data: {
-            "jdbcjson": jdbcinfo
+            "jdbcJsonStringAfterValidate": jdbcJsonStringAfterValidate
         },
         dataType: "json",
         success: function (data) {

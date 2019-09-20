@@ -36,9 +36,8 @@ public class moreUtils {
      * @throws Exception fastjson尝试转json对象异常
      */
     public static JSONObject dealAjaxJsonToJasonObj(String tempstr) throws Exception {
-        JSONObject jbt = null;
         tempstr = deleteNewLineSymbol(tempstr);
-        jbt = JSONObject.parseObject(tempstr);
+        JSONObject jbt = JSONObject.parseObject(tempstr);
         return jbt;
     }
 
@@ -61,6 +60,26 @@ public class moreUtils {
         return targetStr;
     }
 
+    /**
+     * @param status      状态码
+     * @param msg         信息
+     * @param list        表数据（不带表头）
+     * @param columnnames 表头
+     * @return json字符串
+     */
+    public static String unionDatasPro(int status, String msg, List<Map<String, Object>> list, List<String> columnnames, int columncount) {
+        Map<String, Object> tempMap = new HashMap<>();
+        String listStr = JSON.toJSONString(list);
+        String columnnamesString = JSON.toJSONString(columnnames);
+        tempMap.put("status", status + "");
+        tempMap.put("msg", msg);
+        tempMap.put("columncount", columncount + "");//列数
+        tempMap.put("columnnames", columnnamesString);//表头信息
+        tempMap.put("list", listStr);//为了方便，表数据的key还是用list
+        //最后将整个map转成字符串
+        String targetStr = JSON.toJSONString(tempMap);
+        return targetStr;
+    }
 
     /**
      * 此方法只是在普通的System.out.println()方法基础上加上了系统时间

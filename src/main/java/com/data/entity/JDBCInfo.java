@@ -7,12 +7,11 @@ public class JDBCInfo {
 
     private String url;
     private String dbname;
+    private String parameter;
     private String username;
     private String password;
     private String sql;
 
-    private boolean isElementNull;//是否出现元素空
-    private String nullElements;//哪些元素为空
 
     public String getUrl() {
         return url;
@@ -54,19 +53,12 @@ public class JDBCInfo {
         this.sql = sql;
     }
 
-    public boolean getIsElementNull() {
-        return isElementNull;
+
+    public String getParameter() {
+        return parameter;
     }
 
-    public void setElementNull(boolean elementNull) {
-        isElementNull = elementNull;
-    }
-
-    public String getNullElements() {
-        return nullElements;
-    }
-
-    public void setNullElements(String nullElements) {
-        this.nullElements = nullElements;
+    public void setParameter(String parameter) {
+        this.parameter = parameter;
     }
 }
