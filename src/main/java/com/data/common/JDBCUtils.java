@@ -35,6 +35,7 @@ public class JDBCUtils {
             resultset = psmt.executeQuery();//只允许执行查询，可以避免用户输入“drop database.....”等
             resultsetmetadata = resultset.getMetaData();//拿到源数据（(/表头信息)
             fieldNum = resultsetmetadata.getColumnCount();//存列数
+            String tableName = resultsetmetadata.getTableName(1);//获取表名称
             //（1）处理表头信息，记录列名
             for (int j = 1; j <= fieldNum; j++) {
                 columnNames.add(resultsetmetadata.getColumnLabel(j));
@@ -54,6 +55,7 @@ public class JDBCUtils {
             finalMsg.put("list", mapList);//查询结果
             finalMsg.put("columnnames", columnNames);
             finalMsg.put("columncount", fieldNum);//列数
+            finalMsg.put("tablename", tableName);//表名
             return finalMsg;
         } finally {
             closeConnection(conn, psmt, resultset);

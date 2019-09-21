@@ -43,8 +43,9 @@ public class serviceAskTreeData {
                         List<Map<String, Object>> list = (List<Map<String, Object>>) tabledatas.get("list");
                         List<String> columnnames = (List<String>) tabledatas.get("columnnames");
                         int columncount = Integer.parseInt(tabledatas.get("columncount").toString());
+                        String tablename = tabledatas.get("tablename").toString();
                         //最终正确的数据
-                        return moreUtils.unionDatasPro(1, sb.append("查询成功").toString(), list, columnnames, columncount);
+                        return moreUtils.unionDatasPro(1, sb.append("查询成功").toString(), list, columnnames, columncount, tablename);
                     } catch (SQLSyntaxErrorException e) {
                         sb.append(e.getMessage());
                         moreUtils.soutPro("执行sql查询时发生错误：" + e.getMessage());

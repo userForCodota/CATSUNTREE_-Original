@@ -37,7 +37,7 @@ function queryTreeData(jdbcJsonStringAfterValidate) {
             console.log(data);
             //获取成功后将原始数据放进(NewIndex_Global.js中的)全局变量datas里面储存
             datas = data;
-            treeBuildAllStart(data);//尝试种树，在方法内判断是否符合数据要求，此处不再往下延伸。
+            treeBuildAllStart(true, data, null);//尝试种树，在方法内判断是否符合数据要求，此处不再往下延伸。
         },
         error: function () {
             Submitrestore();//按钮恢复原样

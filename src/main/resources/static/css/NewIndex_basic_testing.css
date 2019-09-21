@@ -6,3 +6,14 @@
 #jdbczoon > div {
     border: red solid 1px;
 }
+
+#zteezoon {
+    border: #1113a6 1px solid;
+    /*防止父级塌陷,但是这里允许*/
+    /*overflow: auto;*/
+    /*width: 50%;*/
+}
+
+#zteezoon div {
+    border: red solid 1px;
+}

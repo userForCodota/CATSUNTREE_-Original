@@ -67,7 +67,7 @@ public class moreUtils {
      * @param columnnames 表头
      * @return json字符串
      */
-    public static String unionDatasPro(int status, String msg, List<Map<String, Object>> list, List<String> columnnames, int columncount) {
+    public static String unionDatasPro(int status, String msg, List<Map<String, Object>> list, List<String> columnnames, int columncount, String tablename) {
         Map<String, Object> tempMap = new HashMap<>();
         String listStr = JSON.toJSONString(list);
         String columnnamesString = JSON.toJSONString(columnnames);
@@ -76,6 +76,7 @@ public class moreUtils {
         tempMap.put("columncount", columncount + "");//列数
         tempMap.put("columnnames", columnnamesString);//表头信息
         tempMap.put("list", listStr);//为了方便，表数据的key还是用list
+        tempMap.put("tablename", tablename);//表名
         //最后将整个map转成字符串
         String targetStr = JSON.toJSONString(tempMap);
         return targetStr;

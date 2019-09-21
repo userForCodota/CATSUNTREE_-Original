@@ -3,11 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>CATSUNTREE</title>
+    <!--main-css-->
     <link rel="stylesheet" href="../static/framework/layui-v2.5.4/layui/css/layui.css">
     <link rel="stylesheet" href="../static/css/NewIndex_basic.css">
+    <link rel="stylesheet" href="../static/framework/zTree_v3-master/css/zTreeStyle/zTreeStyle.css">
+    <!--test-->
+    <!--    <link rel="stylesheet" href="../static/css/NewIndex_basic_testing.css">-->
     <!--framework-->
     <script src="../static/framework/Jquery/jquery-3.4.1.js"></script>
     <script src="../static/framework/layui-v2.5.4/layui/layui.js"></script>
+    <script src="../static/framework/zTree_v3-master/js/jquery.ztree.all.js"></script>
     <!--Custom-->
     <script src="../static/js/NewIndex_Global.js"></script>
     <script src="../static/js/NewIndex_interactive.js"></script>
@@ -77,6 +82,48 @@
     </div>
     <!--外部按钮组区 end-->
 </div>
+<!--ztree按钮组-->
+<div id="ztreebtns" style="width: 40px;">
+    <div id="tree1_ExpandAll" title="展开全部">
+        <button type="button" class="layui-btn layui-btn-sm layui-bg-orange">
+            <i class="layui-icon layui-icon-next"></i>
+        </button>
+    </div>
+    <div id="tree1_closeAll" title="收起全部">
+        <button type="button" class="layui-btn layui-btn-sm layui-bg-orange">
+            <i class="layui-icon layui-icon-prev"></i>
+        </button>
+    </div>
+    <div id="tree1_showCid" title="重新组合节点名称展示的信息">
+        <button type="button" class="layui-btn layui-btn-sm">
+            <i class="layui-icon layui-icon-rate"></i>
+        </button>
+    </div>
+    <div id="tree1_init" title="恢复最近">
+        <button type="button" class="layui-btn layui-btn-sm">
+            <i class="layui-icon layui-icon-refresh-3"></i>
+        </button>
+    </div>
+    <div id="tree1_ext4" title="砍树">
+        <button type="button" class="layui-btn layui-btn-sm layui-bg-cyan">
+            <i class="layui-icon layui-icon-close"></i>
+        </button>
+    </div>
+    <!--回到顶部按钮-->
+    <div id="back2top" style="display: none;">
+        <button type="button" class="layui-btn layui-btn-sm layui-bg-red">
+            <i class="layui-icon layui-icon-up"></i>
+        </button>
+    </div>
+</div>
+<!--ztree核心区-->
+<div class="zteezoon" id="zteezoon">
+    <div id="z1">
+        <ul id="treemain" class="ztree"></ul>
+    </div>
+</div>
+
+
 <!--功能组件-->
 <button id="welcomebtn" type="button" class="layui-btn layui-btn-fluid">StartUp</button>
 </body>

@@ -5,10 +5,11 @@ body {
 }
 
 .jdbczoon {
-    /*防止父级塌陷*/
+    /*防止父级塌陷,可能会出现滚动条*/
     overflow: auto;
     height: 400px;
-    width: 60%;
+    width: 49%;
+    min-width: 777px;
     position: fixed;
     right: 0px;
     top: 10px;
@@ -16,6 +17,7 @@ body {
     padding: 1px;
     /*初始化时隐藏*/
     display: none;
+
 }
 
 #jdbczoon > div {
@@ -45,8 +47,8 @@ body {
 /*可调节的显示条宽度大小*/
 #c3 {
     height: 340px;
-    width: 30px;
-    border-radius: 6px;
+    width: 11px;
+    border-radius: 5px;
     background-color: #007DDB;
     /*透明度*/
     /*opacity: 0.15;*/
@@ -116,4 +118,42 @@ body {
     position: fixed;
     width: 100%;
     top: 0px;
+}
+
+/*ztree按钮组*/
+#ztreebtns {
+    position: fixed;
+    left: 5px;
+    top: 12px;
+}
+
+#ztreebtns > div {
+    margin-bottom: 1px;
+}
+
+
+/*树形区域相关*/
+#zteezoon {
+    /*防止父级塌陷,但是这里允许*/
+    /*overflow: auto;*/
+    position: absolute;
+    left: 45px;
+    top: 10px;
+    padding: 1px;
+    margin-bottom: 10px;
+}
+
+/*树形区域div*/
+#zteezoon > div {
+    float: left;
+}
+
+#z1 {
+    background-color: white;
+    border: 2px #f72907 solid;
+    border-radius: 6px;
+    opacity: 0.85;
+    padding: 10px 10px 10px 0px; /*上右下左*/
+    min-width: 250px;
+    min-height: 131px;
 }

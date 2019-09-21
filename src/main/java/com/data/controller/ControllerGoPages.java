@@ -21,4 +21,9 @@ public class ControllerGoPages {
         return "DBinfo";
     }
 
+    @RequestMapping("/iframeForChangeNodeName")
+    public String goiframeForChangeNodeName() {
+        return "iframeForChangeNodeName";
+    }
+
 }
