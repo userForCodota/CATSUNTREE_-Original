@@ -1,4 +1,4 @@
-// 本JS主要用于处理：栏木树的数据请求、数据传输、栏木树的构建等，设计前端树框架
+// 本JS主要用于处理：栏木树的数据请求、数据传输.
 $(function () {
     $("#connDB").click(function () {
         Submitdisable();//按钮效果
@@ -37,8 +37,7 @@ function queryTreeData(jdbcJsonStringAfterValidate) {
             console.log(data);
             //获取成功后将原始数据放进(NewIndex_Global.js中的)全局变量datas里面储存
             datas = data;
-            //此时可以开始组建栏目树
-            treeBuildAllStart(data);
+            treeBuildAllStart(data);//尝试种树，在方法内判断是否符合数据要求，此处不再往下延伸。
         },
         error: function () {
             Submitrestore();//按钮恢复原样
@@ -51,12 +50,6 @@ function queryTreeData(jdbcJsonStringAfterValidate) {
     });
 }
 
-//##############################################################################################################################
-//种树总控
-//参数data：包含状态码、列名数组、表数据、列数和msg信息
-function treeBuildAllStart(data) {
-
-}
 
 //##############################################################################################################################
 

@@ -71,7 +71,6 @@ $(function () {
                 });
             }
         });
-
     });
 
     //点击打开“展示所有数据库和表信息”的页面
@@ -136,28 +135,7 @@ function submitdone_I() {
     $("#connDB").removeClass("layui-btn-disabled");//取消禁用
 }
 
-//一个简单的获取当前系统时间并格式化的函数
-function CurentTime() {
-    var now = new Date();
-    var year = now.getFullYear(); //年
-    var month = now.getMonth() + 1; //月
-    var day = now.getDate(); //日
-    var hh = now.getHours(); //时
-    var mm = now.getMinutes(); //分
-    var clock = year + "-";
-    if (month < 10)
-        clock += "0";
-    clock += month + "-";
-    if (day < 10)
-        clock += "0";
-    clock += day + " ";
-    if (hh < 10)
-        clock += "0";
-    clock += hh + ":";
-    if (mm < 10) clock += '0';
-    clock += mm;
-    return (clock);
-}
+
 
 //显示
 function barshow() {
