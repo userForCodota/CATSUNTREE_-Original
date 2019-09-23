@@ -1,12 +1,7 @@
 package com.data.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Controller
 public class ControllerGoPages {
@@ -16,14 +11,19 @@ public class ControllerGoPages {
         return "NewIndex";
     }
 
-    @RequestMapping("/dbinfo")
+    @RequestMapping("/iframeForShowAllTables")
     public String goDbinfo() {
-        return "DBinfo";
+        return "iframeForShowAllTables";
     }
 
     @RequestMapping("/iframeForChangeNodeName")
     public String goiframeForChangeNodeName() {
         return "iframeForChangeNodeName";
+    }
+
+    @RequestMapping("/iframeForChooseSetting")
+    public String goiframeForChooseSetting() {
+        return "iframeForChooseSetting";
     }
 
 }

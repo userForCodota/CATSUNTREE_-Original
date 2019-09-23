@@ -73,17 +73,28 @@ $(function () {
         });
     });
 
-    //点击打开“展示所有数据库和表信息”的页面
+    //点击打开“探索服务器”的页面
     $("#showAllTables").click(function () {
         layui.use('layer', function () {
             var layer = layui.layer;
             layer.open({
                 type: 2,
-                title: '查看所有的数据库和表格',
+                title: '探索服务器',
                 shadeClose: true,
                 shade: 0.8,
-                area: ['45%', '45%'],
-                content: '/dbinfo' //iframe的url。Controller跳转
+                area: ['75%', '75%'],
+                content: '/iframeForShowAllTables', //iframe的url。Controller跳转
+                success: function (layero, index) {
+                    if (global_properties != null && global_properties.trim() != "") {
+                        var proJSON = JSON.parse(global_properties);
+                        var soString = proJSON.serviceInfo;//仍然是字符串
+                        var soObj = JSON.parse(soString);//仅用于判断
+                        if (soObj != null) {
+                            var iframeBody = layer.getChildFrame('body', index);
+                            iframeBody.find('#settings').val(soString);//信息往iframe传递
+                        }
+                    }
+                }
             });
         });
     });
@@ -134,7 +145,6 @@ function submitdone_I() {
     $("#connDB>i").html("&#xe615;");//换成正常的图标
     $("#connDB").removeClass("layui-btn-disabled");//取消禁用
 }
-
 
 
 //显示

@@ -49,6 +49,7 @@ public class serviceAskTreeData {
                     } catch (SQLSyntaxErrorException e) {
                         sb.append(e.getMessage());
                         moreUtils.soutPro("执行sql查询时发生错误：" + e.getMessage());
+                        return moreUtils.unionDatas(0, sb.toString(), null);
                     } catch (SQLException e) {
                         //conn正确但是异常，说明是sql的问题
                         sb.append(e.getMessage());

@@ -6,20 +6,93 @@
     <script src="../static/framework/Jquery/jquery-3.4.1.js"></script>
     <script src="../static/framework/layui-v2.5.4/layui/layui.js"></script>
     <link rel="stylesheet" href="../static/framework/layui-v2.5.4/layui/css/layui.css">
+    <link rel="stylesheet" href="../static/framework/labelauty/css/jquery-labelauty.css">
+    <script src="../static/framework/labelauty/js/jquery-labelauty.js"></script>
+
 </head>
 <body>
 <!--隐藏域-->
 <input type="hidden" id="datas" value="">
 <input type="hidden" id="treesettings" value="">
-<!--showdiv-->
-<input type="button" id="test">
+<!--test-->
+<input type="button" id="a" value="aaaaaaaaaaaaa">
+<script>
+    $("#a").click(function () {
+        console.log($("#datas").val());
+        console.log($("#treesettings").val());
+    });
+</script>
+<!--选择-->
+<div>
+    <form class="layui-form layui-form-pane" action="" style="max-width: 1200px;" lay-filter="*">
+        <div class="layui-form-item">
+            <label class="layui-form-label">原始配置</label>
+            <div class="layui-input-block">
+                <input type="text" name="title" required lay-verify="required" placeholder="" autocomplete="off"
+                       class="layui-input" disabled="disabled" id="msginput">
+            </div>
+        </div>
+        <div class="layui-form-item" pane>
+            <div class="layui-form-mid layui-word-aux">辅助文字</div>
+            <label class="layui-form-label">请选择</label>
+            <div class="layui-input-block" id="checkboxList">
+                <!--<input type="checkbox" name="like[write]" title="写作">-->
+                <!--<input type="checkbox" name="like[read]" title="阅读" checked>-->
+                <!--<input type="checkbox" name="like[dai]" title="发呆">-->
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">确定提交</label>
+            <div class="layui-inline">
+                <button id="rebuild" type="button" class="layui-btn" style="min-width: 200px;">reBuild</button>
+            </div>
+            <!--待定-->
+            <!--
+                        <div class="layui-inline" style="margin-left: 15px">
+                            <div class="layui-btn-group">
+                                <button type="button" class="layui-btn">全选</button>
+                                <button type="button" class="layui-btn">反选</button>
+                                <button type="button" class="layui-btn">全不选</button>
+                            </div>
+                        </div>
+            -->
+        </div>
+    </form>
+</div>
 <script>
     $(function () {
-        $("#test").click(function () {
-            console.log($("#datas").val());
+        layui.use('form', function () {
+            var form = layui.form;
         });
+        //加载配置信息
+        var datas = $("#datas").val();
+        var treesettings = $("#treesettings").val();
+        if ((datas != null && datas != "") && (treesettings != null && treesettings != "")) {
+            var datasObject = JSON.parse(datas);
+            var sobj = JSON.parse(treesettings);
+            $("#msginput").val('栏目id="' + sobj.data.simpleData.idKey + '",父栏目id="' + sobj.data.simpleData.pIdKey + '",栏目名称="' + sobj.data.key.name + '"');
+            //将字段以多选框的形式展示
+            var parse = JSON.parse(datasObject.columnnames);
+            for (var i = 0; i < parse.length; i++) {
+                $("#checkboxList").append('<input type="checkbox" name="' + parse[i] + '" title="' + parse[i] + '">');
+            }
+            //rebuild提交事件
+            $("#rebuild").on('click', function () {
+                //因ztree的框架限制，只能将数据列表中的name进行重组
+                reloadDatas(JSON.parse(datasObject.list));
+                //未完待续
+                /*                var $checkboxList = $("#checkboxList>input");
+                                for (var i = 0; i < $checkboxList.length; i++) {
+                                    console.log($checkboxList.eq(i).attr("name"));
+                                }*/
+            });
+        }
+    });//end $();
+    function reloadDatas(listJSON) {
+        for (var i = 0; i < listJSON.length; i++) {
+        }
+    }
 
-    });
 
 </script>
 </body>

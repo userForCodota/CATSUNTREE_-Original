@@ -14,9 +14,23 @@ $(function () {
         }
     });
     $("#tree1_showCid").click(function () {
-        changeNodeDisplayName();//重新决定节点的名称展示哪些内容
+        // changeNodeDisplayName();//重新决定节点的名称展示哪些内容
+        // layui.use('layer', function () {
+        //     var layer = layui.layer;
+        //     layer.tips('暂未开放，请留意后续版本', '#tree1_showCid');
+        // });
+        var newlist = cnameWithCid(JSON.parse(datas.list));
+        $.fn.zTree.destroy("treemain");//销毁 #treemain 的 zTree
+        $.fn.zTree.init($("#treemain"), currentMainTreeSetting, newlist);//树重新初始化
     });
     $("#tree1_init").click(function () {
+        if (datas == null) {
+            layui.use('layer', function () {
+                var layer = layui.layer;
+                layer.tips('最近并没有种树', '#tree1_init');
+            });
+            return;
+        }
         $.fn.zTree.init($("#treemain"), currentMainTreeSetting, JSON.parse(datas.list));//树重新初始化
     });
     $("#tree1_ext4").click(function () {
@@ -82,13 +96,23 @@ function assemblySettings(isFirst, queryname, customInput) {
         var global_propertiesJSON = JSON.parse(global_properties);
         var treeBasicElementString = global_propertiesJSON.treeBasicElement;//拿到json数组
         var treeBasicElement = JSON.parse(treeBasicElementString);
+        var hadSetProperties = false;//是否在属性文件中指定了对应表的cid/pcid/cname
         for (var i = 0; i < treeBasicElement.length; i++) {
             if (treeBasicElement[i].tablename == queryname) {
                 targetCid = treeBasicElement[i].cid;
                 targetPcid = treeBasicElement[i].pcid;
                 targetCname = treeBasicElement[i].cname;
+                hadSetProperties = true;
                 break;
             }
+        }
+        //根据flag判断是否需要用户手动输入指定cid/pcid/cname
+        if (hadSetProperties) {
+            //已配置，继续往下执行代码。
+        } else {
+            //尚未配置，此时需要跳出方法，调用界面让用户指定。
+            customChooseSettings();
+            return;
         }
     } else {
         //通过读取用户选定的来组装
@@ -114,10 +138,15 @@ function changeNodeDisplayName() {
             var layer = layui.layer;
             layer.open({
                 type: 2,
+                shadeClose: true,
+                shade: 0.8,
+                area: ['85%', '85%'],
                 content: '/iframeForChangeNodeName',
                 success: function (layero, index) {
                     var iframeBody = layer.getChildFrame('body', index);
-                    iframeBody.find('#datas').val(JSON.stringify(datas));
+                    iframeBody.find('#datas').val(JSON.stringify(datas));//把查到的数据库信息往iframe传递
+                    iframeBody.find('#treesettings').val(JSON.stringify(currentMainTreeSetting));//把查到的数据库信息往iframe传递
+                    // layer.iframeAuto(index);
                 }
             });
         });
@@ -129,4 +158,47 @@ function changeNodeDisplayName() {
             });
         });
     }
+}
+
+//利用datas.list的数据生成一份变种data.list2，其中展示名称=cname+cid;返回值是处理后的JSON集合
+function cnameWithCid(datasListJSON) {
+    //从settings中查询cid/pcid/cname分别是哪个字段
+    var cid_fieldName = currentMainTreeSetting.data.simpleData.idKey;
+    var pcid_fieldName = currentMainTreeSetting.data.simpleData.pIdKey;
+    var cname_fieldName = currentMainTreeSetting.data.key.name;
+    //重新组装
+    var newList = [];
+    for (var i = 0; i < datasListJSON.length; i++) {
+        var tempvalue_cid = datasListJSON[i][cid_fieldName];
+        var tempvalue_pcid = datasListJSON[i][pcid_fieldName];
+        var tempvalue_cname = datasListJSON[i][cname_fieldName] + tempvalue_cid;//将展示名称=cname+cid
+        var tempJSON = {};
+        tempJSON[cid_fieldName] = tempvalue_cid;
+        tempJSON[pcid_fieldName] = tempvalue_pcid;
+        tempJSON[cname_fieldName] = tempvalue_cname;
+        newList.push(tempJSON);
+    }
+    return newList;
+}
+
+//弹出界面让用户选择cid/pcid/cname
+function customChooseSettings() {
+    //点击打开“选择字段”的页面
+    layui.use('layer', function () {
+        var layer = layui.layer;
+        layer.open({
+            type: 2,
+            title: '选择字段',
+            shadeClose: false,
+            closeBtn: 1,
+            shade: 0.8,
+            area: ['75%', '50%'],
+            content: '/iframeForChooseSetting', //iframe的url。Controller跳转
+            success: function (layero, index) {
+                var iframeBody = layer.getChildFrame('body', index);
+                iframeBody.find('#datacolumnnames').val(datas.columnnames);//信息往iframe传递
+            }
+        })
+        ;
+    });
 }

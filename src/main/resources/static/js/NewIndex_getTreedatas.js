@@ -7,20 +7,23 @@ $(function () {
         if (jdbcJsonStringAfterValidate != null) {
             barshow();
             //经验证，此数据可尝试进行服务端数据请求
-            queryTreeData(jdbcJsonStringAfterValidate);//此步骤已将数据存放在全局变量datas
+            queryTreeData(true, jdbcJsonStringAfterValidate);//此步骤已将数据存放在全局变量datas
             // 因ajax存在异步性（取消的话影响页面体验/卡死），所以后续操作写在ajax的回调函数，此处不再往下展开。
         } else {
             //null表示校验不通过。提示信息在jdbcJSONvalidation()里面比较详细了，这里不再累赘。
             Submitrestore();//按钮恢复原样
         }
-
     });
 });//end jQuery
 //##############################################################################################################################
+//方便iframe调用，这里把点击事件抽成方法
+function startQuery() {
+
+}
 
 //##############################################################################################################################
 //将JDBC-json字符串发送给服务器进行查询
-function queryTreeData(jdbcJsonStringAfterValidate) {
+function queryTreeData(isFirst, jdbcJsonStringAfterValidate) {
     // 启动ajax
     $.ajax({
         url: "/queryTreeData",
@@ -32,12 +35,13 @@ function queryTreeData(jdbcJsonStringAfterValidate) {
         success: function (data) {
             barFull_I();//进度条拉满
             submitdone();//查询成功专用按钮恢复原样
+            showtreezoonAndBtns();//动态展示树的按钮和区域
             //后台使用JSON.toJSONString(map)传回数据，这里ajax直接dataType: "json"接收为json类型
             console.log("[" + CurentTime() + "]\t" + "操作结束。请检查信息：");
             console.log(data);
             //获取成功后将原始数据放进(NewIndex_Global.js中的)全局变量datas里面储存
             datas = data;
-            treeBuildAllStart(true, data, null);//尝试种树，在方法内判断是否符合数据要求，此处不再往下延伸。
+            treeBuildAllStart(isFirst, data, null);//尝试种树，在方法内判断是否符合数据要求，此处不再往下延伸。
         },
         error: function () {
             Submitrestore();//按钮恢复原样
@@ -52,6 +56,12 @@ function queryTreeData(jdbcJsonStringAfterValidate) {
 
 
 //##############################################################################################################################
+function showtreezoonAndBtns() {
+    $("#zteezoon").fadeIn();
+    $("#ztreebtns").fadeIn();
+
+
+}
 
 //前端对于用户输入的jdbc字符串进行校验,验证成功则返回对应的字符串，否则返回null
 function jdbcJSONvalidation(inputjdbcinfo) {

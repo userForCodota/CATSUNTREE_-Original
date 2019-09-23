@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>iframeForChangeNodeName</title>
+    <link rel="stylesheet" href="../static/framework/layui-v2.5.4/layui/css/layui.css">
+    <script src="../static/framework/Jquery/jquery-3.4.1.js"></script>
+    <script src="../static/framework/layui-v2.5.4/layui/layui.js"></script>
+</head>
+<body style="text-align: center">
+<script>
+    layui.use('form', function () {
+        var form = layui.form;
+    });
+    $(function () {
+        console.log($("#datacolumnnames").val());
+    });
+
+
+
+
+</script>
+<input type="hidden" id="datacolumnnames" value="">
+<div style="margin: 0 auto; position: relative;top: 100px;">
+    <p >当前查询表格尚未指定cid/pcid/cname对应的字段，请手动选择</p>
+    <form class="layui-form" action="" id="mainform">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <select name="cid" id="cid">
+                    <option value="disabled" disabled>请选择栏目ID字段</option>
+                </select>
+            </div>
+            <div class="layui-inline" style="margin-left: -12px;">
+                <select name="cid" id="pcid">
+                    <option value="disabled" disabled>请选择父栏目ID字段</option>
+                </select>
+            </div>
+            <div class="layui-inline" style="margin-left: -12px;">
+                <select name="cid" id="cname">
+                    <option value="disabled" disabled>请选择栏目名称字段</option>
+                </select>
+            </div>
+            <div class="layui-inline" style="margin-left: -12px;">
+                <button type="button" class="layui-btn layui-btn-radius">确定</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
