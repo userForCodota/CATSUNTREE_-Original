@@ -44,8 +44,10 @@ $(function () {
 function treeBuildAllStart(isFirst, data, customInput) {
     if (checkStatusAndColumncount(data)) {
         currentMainTreeSetting = assemblySettings(isFirst, data.tablename, customInput);
-        //种树
-        $.fn.zTree.init($("#treemain"), currentMainTreeSetting, JSON.parse(data.list));
+        if (currentMainTreeSetting != null) {
+            //种树
+            $.fn.zTree.init($("#treemain"), currentMainTreeSetting, JSON.parse(data.list));
+        }
     }
 }
 
@@ -86,6 +88,7 @@ function checkStatusAndColumncount(data) {
 //组装栏目树所需的配置，根据配置文件或者用户输入的信息进行组装
 // isFirst:是否是读取数据库后的首次自动加载
 // data:用于提取表名，与属性文件进行对照
+//return settingsAfterAssembly,如果满足条件则返回结果，否则返回null防止其他地方调此方法时用的是无限的配置。
 function assemblySettings(isFirst, queryname, customInput) {
     var targetCid;
     var targetPcid;
@@ -112,7 +115,7 @@ function assemblySettings(isFirst, queryname, customInput) {
         } else {
             //尚未配置，此时需要跳出方法，调用界面让用户指定。
             customChooseSettings();
-            return;
+            return null;
         }
     } else {
         //通过读取用户选定的来组装
@@ -190,9 +193,9 @@ function customChooseSettings() {
             type: 2,
             title: '选择字段',
             shadeClose: false,
-            closeBtn: 1,
+            closeBtn: 2,
             shade: 0.8,
-            area: ['75%', '50%'],
+            area: ['90%', '90%'],
             content: '/iframeForChooseSetting', //iframe的url。Controller跳转
             success: function (layero, index) {
                 var iframeBody = layer.getChildFrame('body', index);
@@ -201,4 +204,13 @@ function customChooseSettings() {
         })
         ;
     });
+}
+
+
+//当查询后发现没有预设cid/pcid/cname，客户选择完之后返回3个字段名称，
+// 调用此函数，将配置更新，然后用datas组装栏木树
+function buildTreeafterChooseFields(jsonstring) {
+    var chooseField = JSON.parse(jsonstring);
+    //再次调用树初始化工具
+    treeBuildAllStart(false, datas, chooseField);//带考究
 }

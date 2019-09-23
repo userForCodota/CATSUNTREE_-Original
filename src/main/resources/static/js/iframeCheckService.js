@@ -1,6 +1,15 @@
 var currentJDBCinfo;
 var afterChoseDB;
+var finalSend;//最终传值
 $(function () {
+    //展示
+    $("#startall").click(function () {
+        $("#startall").css("display", "none");
+        $("#conaDA").show();
+        $("#conaDA>div:nth-child(1)").show();
+        $("#conaDA>div:nth-child(2)").show();
+        $("#conaDA>div:nth-child(3)").show();
+    });
     //测试阶段
     // $("#settings").val("[{\"servicename\":\"219\",\"url\":\"jdbc:mysql://139.129.67.219:3306/\",\"dbname\":\"mysql\",\"parameter\":\"?serverTimezone=UTC\",\"username\":\"zhsdevelop\",\"password\":\"southnet\",\"sql\":\"SHOW DATABASES\"},{\"servicename\":\"157\",\"url\":\"jdbc:mysql://192.168.43.157:3306/\",\"dbname\":\"mysql\",\"parameter\":\"?serverTimezone=UTC\",\"username\":\"root\",\"password\":\"Nfw123456a?\",\"sql\":\"SHOW DATABASES\"}]");
     fillService();//将配置的属性填充到服务器下拉框
@@ -121,9 +130,9 @@ $(function () {
                     if (data != null && data != "") {
                         var listString = data.list;
                         var listJson = JSON.parse(listString);
-                        $("#showMytables").empty();
+                        $("#alltables").empty();
                         var columnname = JSON.parse(data.columnnames)[0];
-                        // $("#showMytables").append('<label class="layui-form-label">请选择</label>');
+                        $("#alltables").append('<option value="">请选择</option>');
                         for (var i = 0; i < listJson.length; i++) {
                             var tablename = listJson[i][columnname];
                             $("#alltables").append('<option value="' + tablename + '">' + tablename + '</option>');
@@ -151,20 +160,27 @@ $(function () {
         var layer = layui.layer;
         form333.on('select(alltables)', function (data) {
             var tablename = data.value;
-            console.log(currentJDBCinfo);
-            afterChoseDB["sql"] = "select * from " + tablename;//把sql语句换掉
-            $("#funalbtn").html("select * from " + tablename);
+            $("#saveTbname").val(tablename);//填充
+            var a = ($("#conditions").val() == null || $("#conditions").val() == "") ? "" : $("#conditions").val();
+            finalSend = "select\t" + $("#content").val() + "\tFROM\t" + tablename + "\t" + a;
+            afterChoseDB["sql"] = finalSend;//把sql语句换掉
             layer.tips('点击查询', '#funalbtn', {
                 tips: 3
             });
         });
     });
+    //查询事件，调用父层方法
     $("#funalbtn").click(function () {
-        var jdbcstring = JSON.stringify(afterChoseDB);
-        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-        window.parent.barshow();
-        window.parent.queryTreeData(true, jdbcstring);
-        parent.layer.close(index); //再执行关闭
+        var val = $("#saveTbname").val();
+        if (val != null) {
+            if (val.trim() != "") {
+                var jdbcstring = JSON.stringify(afterChoseDB);
+                var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                window.parent.barshow();
+                window.parent.queryTreeData(true, jdbcstring);
+                parent.layer.close(index); //再执行关闭
+            }
+        }
     });
 });//end $();data
 

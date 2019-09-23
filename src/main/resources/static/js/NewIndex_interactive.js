@@ -82,7 +82,7 @@ $(function () {
                 title: '探索服务器',
                 shadeClose: true,
                 shade: 0.8,
-                area: ['75%', '75%'],
+                area: ['90%', '90%'],
                 content: '/iframeForShowAllTables', //iframe的url。Controller跳转
                 success: function (layero, index) {
                     if (global_properties != null && global_properties.trim() != "") {

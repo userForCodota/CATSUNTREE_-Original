@@ -12,39 +12,89 @@
     layui.use('form', function () {
         var form = layui.form;
     });
-    $(function () {
-        console.log($("#datacolumnnames").val());
-    });
-
-
-
-
 </script>
+<div style="width: 45%; margin: 0 auto; position: relative;top: 50px;">
+    <button type="button" class="layui-btn layui-anim layui-btn-fluid" id="startbtn">手动选择字段</button>
+</div>
 <input type="hidden" id="datacolumnnames" value="">
-<div style="margin: 0 auto; position: relative;top: 100px;">
-    <p >当前查询表格尚未指定cid/pcid/cname对应的字段，请手动选择</p>
-    <form class="layui-form" action="" id="mainform">
+<div id="fieldchoose" class="layui-anim" style="margin: 0 auto; position: relative;top: 100px; display: none;">
+    <p>当前查询表格尚未指定cid/pcid/cname对应的字段，请手动选择</p>
+    <form class="layui-form" action="" id="mainform" lay-filter="mainform">
         <div class="layui-form-item">
             <div class="layui-inline">
                 <select name="cid" id="cid">
-                    <option value="disabled" disabled>请选择栏目ID字段</option>
+                    <option value="disabled">请选择栏目ID字段</option>
                 </select>
             </div>
             <div class="layui-inline" style="margin-left: -12px;">
-                <select name="cid" id="pcid">
-                    <option value="disabled" disabled>请选择父栏目ID字段</option>
+                <select name="pcid" id="pcid">
+                    <option value="disabled">请选择父栏目ID字段</option>
                 </select>
             </div>
             <div class="layui-inline" style="margin-left: -12px;">
-                <select name="cid" id="cname">
-                    <option value="disabled" disabled>请选择栏目名称字段</option>
+                <select name="cname" id="cname">
+                    <option value="disabled">请选择栏目名称字段</option>
                 </select>
             </div>
             <div class="layui-inline" style="margin-left: -12px;">
-                <button type="button" class="layui-btn layui-btn-radius">确定</button>
+                <button type="button" class="layui-btn layui-btn-radius" id="sure">确定</button>
             </div>
         </div>
     </form>
 </div>
+<script>
+    $(function () {
+        //#sure 提交事件
+        $("#sure").click(function () {
+            var cid = $("#cid option:selected").val();
+            var pcid = $("#pcid option:selected").val();
+            var cname = $("#cname option:selected").val();
+            if ((cid != null && cid != "") && (pcid != null && pcid != "") && (cname != null && cname != "")) {
+                var fieldArray = {};
+                fieldArray["cid"] = cid;
+                fieldArray["pcid"] = pcid;
+                fieldArray["cname"] = cname;
+                var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                parent.layer.close(index); //再执行关闭
+                window.parent.buildTreeafterChooseFields(JSON.stringify(fieldArray));//调用父层的方法
+            } else {
+                layui.use('layer', function () {
+                    var layer = layui.layer;
+                    layer.msg("不能为空");
+                });
+            }
+        });
+
+
+        //因$()在iframe时无法加入，所以需要主动按钮激活
+        $("#startbtn").click(function () {
+            $("#startbtn").addClass("layui-anim-fadeout");
+            $("#startbtn").css("display", "none");
+            //数据填充
+            var $mainform = $("#mainform select");
+            console.log($mainform.length);
+            try {
+                var datacolumnnames = JSON.parse($("#datacolumnnames").val());
+            } catch (e) {
+                console.log(e);
+            }
+            if (datacolumnnames != null && datacolumnnames != "") {
+                //把字段拼接到下拉列框
+                for (var j = 0; j < datacolumnnames.length; j++) {
+                    $("#cid").append('<option value="' + datacolumnnames[j] + '">' + datacolumnnames[j] + '</option>');
+                    $("#pcid").append('<option value="' + datacolumnnames[j] + '">' + datacolumnnames[j] + '</option>');
+                    $("#cname").append('<option value="' + datacolumnnames[j] + '">' + datacolumnnames[j] + '</option>');
+                }
+                $("#fieldchoose").show();
+                $("#fieldchoose").addClass("layui-anim-scaleSpring");
+                // 重新渲染form
+                layui.use('form', function () {
+                    var formEEE = layui.form;
+                    formEEE.render('select', 'mainform');
+                });
+            }
+        });
+    });
+</script>
 </body>
 </html>

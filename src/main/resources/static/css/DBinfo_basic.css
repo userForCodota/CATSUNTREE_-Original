@@ -1,7 +1,4 @@
-#aaaaaaaa{
-    width: 500px;
-}
-
-#bbbbbbbb{
-    margin-bottom: 1px;
+#submitAAA > input, #submitAAA > span {
+    min-height: 30px;
+    min-width: 100px;
 }
