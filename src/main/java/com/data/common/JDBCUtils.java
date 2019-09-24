@@ -92,14 +92,16 @@ public class JDBCUtils {
             conn = DriverManager.getConnection(jio.getUrl() + jio.getDbname() + jio.getParameter(), jio.getUsername(), jio.getPassword());
         } catch (CommunicationsException e) {
 //            e.printStackTrace();
-            sb.append(e.getMessage().replaceAll("\n", "|"));
-            moreUtils.soutPro("getConnection()获取连接时发生错误，错误信息：" + sb.toString());
-            sb.append(e.getMessage());
+            String tempMsg = e.getMessage().replaceAll("\n", "== ");
+            sb.append(tempMsg);
+            moreUtils.soutPro("尝试获取链接时发生错误以下错误：");
+            moreUtils.soutPro(tempMsg);
         } catch (Exception e) {
 //            e.printStackTrace();
-            sb.append(e.getMessage().replaceAll("\n", "|"));
-            moreUtils.soutPro("尝试获取数据库连接时发生错误，信息：" + sb.toString());
-            sb.append(e.getMessage());
+            String tempMsg = e.getMessage().replaceAll("\n", "==");
+            sb.append(tempMsg);
+            moreUtils.soutPro("尝试获取链接时发生错误以下错误：");
+            moreUtils.soutPro(tempMsg);
         }
         return conn;
     }

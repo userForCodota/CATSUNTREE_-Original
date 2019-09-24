@@ -5,6 +5,9 @@ $(function () {
         $("#welcomebtn").show();
         $("#welcomebtn").addClass("layui-anim layui-anim-fadein");
     }, 500);
+    setTimeout(function () {
+        $("#weldiv").css("opacity", 0.25);
+    }, 1500);
     //（效果）点击欢迎按钮后显示JDBC区
     $("#welcomebtn").click(function () {
         //加载配置文件（方法写在其他JS）
@@ -18,7 +21,7 @@ $(function () {
         // （效果）jdbc输入区淡入淡出 start
         $(".jdbczoon").mouseover(function () {
             $("#c1,#c2").show();
-            $("#c3").css("opacity", 1.0);//透明度
+            $("#c3").css("opacity", 0.85);//透明度
         });
         $(".jdbczoon").mouseleave(function () {
             $("#c1,#c2").css("display", "none");
@@ -29,8 +32,8 @@ $(function () {
     //（效果）JSON校验网站弹出层
     $("button[title='JSON格式校验']").click(function () {
         layui.use('layer', function () {
-            layer.confirm('是否打开？', {
-                time: 2000, //20s后自动关闭
+            layer.confirm('打开？', {
+                time: 2500, //20s后自动关闭
                 btn: ['是的', '下次']
             }, function () {
                 window.open("http://www.bejson.com/")
@@ -43,7 +46,7 @@ $(function () {
         $("#c2 textarea").val("");
         layui.use('layer', function () {
             var layer = layui.layer;
-            layer.msg("已清空");
+            layer.msg("ALL Clear !!");
         });
 
     });
@@ -52,8 +55,7 @@ $(function () {
     $("#resetJDBCtextarea").click(function () {
         layui.use('layer', function () {
             var layer = layui.layer;
-            // var propertiesString = $("#hideproperties").val();//读取隐藏域值
-            var propertiesString = global_properties;//重全局变量读取
+            var propertiesString = global_properties;//从全局变量读取
             if (propertiesString != null && propertiesString.trim() != "") {
                 var proObj = JSON.parse(propertiesString);
                 var basicjdbcString = proObj.basicjdbc;//拿到的是JSON格式的字符串
@@ -66,7 +68,7 @@ $(function () {
             } else {
                 var exampleJDBC = "{\"url\":\"jdbc:mysql://139.129.67.219:3306/\",\"dbname\":\"zhstjj\",\"parameter\":\"?serverTimezone=UTC\",\"username\":\"zhsdevelop\",\"password\":\"southnet\",\"sql\":\"select * from channel\"}";
                 fillJDBCtextarea(exampleJDBC);
-                layer.tips('找不到属性文件或属性文件为空，已使用示例配置', '#resetJDBCtextarea', {
+                layer.tips('已使用示例配置', '#resetJDBCtextarea', {
                     tips: [4, '#564bba']
                 });
             }
@@ -98,6 +100,24 @@ $(function () {
             });
         });
     });
+
+
+    $("#weldiv").mouseover(function () {
+        $("#weldiv").css("opacity", 0.75);
+    });
+    $("#weldiv").mouseleave(function () {
+        $("#weldiv").css("opacity", 0.25);
+    });
+
+    //预留了一组按钮，下版本可以扩展
+    $("#nextTime button").click(function () {
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            layer.msg("Hello World !");
+        });
+    });
+
+
 });//end jquery
 
 //为ajax发生请求时写的交互 N个

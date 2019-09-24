@@ -177,7 +177,7 @@ $(function () {
                 var jdbcstring = JSON.stringify(afterChoseDB);
                 var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                 window.parent.barshow();
-                window.parent.queryTreeData(true, jdbcstring);
+                window.parent.queryTreeData(true, jdbcstring);//有待考究
                 parent.layer.close(index); //再执行关闭
             }
         }

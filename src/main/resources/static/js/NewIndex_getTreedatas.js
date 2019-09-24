@@ -28,6 +28,7 @@ function queryTreeData(isFirst, jdbcJsonStringAfterValidate) {
     $.ajax({
         url: "/queryTreeData",
         Type: "post",
+        timeout: 20000,
         data: {
             "jdbcJsonStringAfterValidate": jdbcJsonStringAfterValidate
         },
@@ -39,17 +40,36 @@ function queryTreeData(isFirst, jdbcJsonStringAfterValidate) {
             //后台使用JSON.toJSONString(map)传回数据，这里ajax直接dataType: "json"接收为json类型
             console.log("[" + CurentTime() + "]\t" + "操作结束。请检查信息：");
             console.log(data);
+            currentMainTreeJDBC = JSON.parse(jdbcJsonStringAfterValidate);//将本次查询成功的JDBC信息转成json存，currentMainTreeJDBC是全局变量
             //获取成功后将原始数据放进(NewIndex_Global.js中的)全局变量datas里面储存
             datas = data;
             treeBuildAllStart(isFirst, data, null);//尝试种树，在方法内判断是否符合数据要求，此处不再往下延伸。
         },
-        error: function () {
-            Submitrestore();//按钮恢复原样
-            barZero();//进度条归零
-            layui.use('layer', function () {
-                var layer = layui.layer;
-                layer.msg("[Ajax request error.]可能原因:服务器未启动或业务繁忙");
-            });
+        // error: function () {},
+        complete: function (XMLHttpRequest, status) {
+            if (status == 'timeout') {//超时,status还有success,error等值的情况
+                Submitrestore();//按钮恢复原样
+                barZero();//进度条归零
+                layui.use('layer', function () {
+                    var layer = layui.layer;
+                    layer.alert('Ajax[status]=timeout。可能原因:数据量过大查询超时(可减少字段测试)...', {
+                        skin: 'layui-layer-lan'
+                        , closeBtn: 0
+                        , anim: 4 //动画类型
+                    });
+                });
+            } else if (status == 'error') {
+                Submitrestore();//按钮恢复原样
+                barZero();//进度条归零
+                layui.use('layer', function () {
+                    var layer = layui.layer;
+                    layer.alert('Ajax[status]=error。可能原因:服务器未启动', {
+                        skin: 'layui-layer-lan'
+                        , closeBtn: 0
+                        , anim: 4 //动画类型
+                    });
+                });
+            }
         }
     });
 }

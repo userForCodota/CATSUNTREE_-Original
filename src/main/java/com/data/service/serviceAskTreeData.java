@@ -32,6 +32,7 @@ public class serviceAskTreeData {
             //首先尝试解析是否能转成JSON对象,可能有异常在catch处捕获
             JSONObject jsonObject = JSONObject.parseObject(jdbcJsonStringAfterValidate);
             if (jsonObject != null) {
+                moreUtils.soutPro("已获取数据库连接.\n");
                 //将json对象优化处理为实体类,并记录信息
                 JDBCInfo jdbcInfo = serviceAskTreeData.JSONObjToJDBCInfoEntity(jsonObject, sb);
                 //使用jdbc信息获取数据库连接

@@ -9,7 +9,8 @@ var global_properties;
 //      datas.list：查询结果临时表的数据，JSON对象集合的字符串类型
 //      datas.tablename:表名
 var datas;
-
+//currentMainTreeSetting：记录当前主树使用的配置属性
+var currentMainTreeJDBC;
 //currentMainTreeSetting：记录当前主树使用的配置属性
 var currentMainTreeSetting;
 //##############################################################################################################################

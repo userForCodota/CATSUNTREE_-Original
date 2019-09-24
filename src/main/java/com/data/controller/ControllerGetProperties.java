@@ -41,9 +41,9 @@ public class ControllerGetProperties {
                 //将本组K-V存进容器
                 if (key != null) {
                     propsmap.put(key.toString(), value == null ? "" : value.toString());
-                    moreUtils.soutPro("已读取属性值key=" + key + "\tvalue=" + value);
                 }
             }
+            moreUtils.soutPro("已读取属性文件.");
         } catch (FileNotFoundException e) {
             moreUtils.soutPro("找不到属性文件。" + e.getMessage());
             //e.printStackTrace();
@@ -51,7 +51,6 @@ public class ControllerGetProperties {
             //e.printStackTrace();
             moreUtils.soutPro("加载属性文件时发生错误。" + e.getMessage());
         } finally {
-            //?
         }
         //最终利用fastjson将map对象转JSON字符串
         mapstring = JSON.toJSONString(propsmap);

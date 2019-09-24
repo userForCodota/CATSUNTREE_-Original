@@ -101,7 +101,8 @@ body {
 /*欢迎按钮 保持居中显示的非完全方法*/
 #welcomebtn {
     height: 35px;
-    width: 500px;
+    width: 50%;
+    max-width: 500px;
     border-radius: 10px;
     position: absolute;
     left: 46%;

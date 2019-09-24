@@ -46,6 +46,7 @@ function treeBuildAllStart(isFirst, data, customInput) {
         currentMainTreeSetting = assemblySettings(isFirst, data.tablename, customInput);
         if (currentMainTreeSetting != null) {
             //种树
+            $.fn.zTree.destroy("treemain");//销毁 #treemain 的 zTree
             $.fn.zTree.init($("#treemain"), currentMainTreeSetting, JSON.parse(data.list));
         }
     }
@@ -207,7 +208,7 @@ function customChooseSettings() {
 }
 
 
-//当查询后发现没有预设cid/pcid/cname，客户选择完之后返回3个字段名称，
+//当查询后发现没有预设cid/pcid/cname，客户选择完之后返回3个字段名称，将↓
 // 调用此函数，将配置更新，然后用datas组装栏木树
 function buildTreeafterChooseFields(jsonstring) {
     var chooseField = JSON.parse(jsonstring);
