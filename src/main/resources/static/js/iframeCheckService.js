@@ -9,6 +9,18 @@ $(function () {
         $("#conaDA>div:nth-child(1)").show();
         $("#conaDA>div:nth-child(2)").show();
         $("#conaDA>div:nth-child(3)").show();
+        /*        layui.use('layer', function () {
+                    layer.tips('预设信息可直接选取', '#posia', {
+                        tips: 3,
+                        tipsMore: true
+                    });
+                });*/
+        layui.use('layer', function () {
+            layer.tips('或参考示例', '#resetservicename', {
+                tips: 3,
+                tipsMore: true
+            });
+        });
     });
     //测试阶段
     // $("#settings").val("[{\"servicename\":\"219\",\"url\":\"jdbc:mysql://139.129.67.219:3306/\",\"dbname\":\"mysql\",\"parameter\":\"?serverTimezone=UTC\",\"username\":\"zhsdevelop\",\"password\":\"southnet\",\"sql\":\"SHOW DATABASES\"},{\"servicename\":\"157\",\"url\":\"jdbc:mysql://192.168.43.157:3306/\",\"dbname\":\"mysql\",\"parameter\":\"?serverTimezone=UTC\",\"username\":\"root\",\"password\":\"Nfw123456a?\",\"sql\":\"SHOW DATABASES\"}]");
@@ -68,6 +80,7 @@ $(function () {
         // 启动ajax
         $.ajax({
             url: "/queryTreeData",
+            timeout: 20000,
             Type: "post",
             data: {
                 "jdbcJsonStringAfterValidate": val
@@ -121,6 +134,7 @@ $(function () {
             $.ajax({
                 url: "/queryTreeData",
                 Type: "post",
+                timeout: 20000,
                 data: {
                     "jdbcJsonStringAfterValidate": newjsbcString
                 },
@@ -179,6 +193,13 @@ $(function () {
                 window.parent.barshow();
                 window.parent.queryTreeData(true, jdbcstring);//有待考究
                 parent.layer.close(index); //再执行关闭
+            } else {
+                layui.use('layer', function () {
+                    var layer = layui.layer;
+                    layer.tips('重要参数不能为空', '#saveTbname', {
+                        tips: 3
+                    });
+                });
             }
         }
     });
@@ -195,11 +216,11 @@ function fillService() {
                 var b = parse[i].servicename;
                 $("#servicenames").append('<option value="' + b + '">' + b + '</option>');
             }
-            layui.use('layer', function () {
-                layer.tips('已尝试加载预设的配置属性', '#msgtips', {
-                    tips: 3
-                });
-            });
+            /*            layui.use('layer', function () {
+                            layer.tips('已尝试加载预设的配置属性', '#msgtips', {
+                                tips: 3
+                            });
+                        });*/
             // 绑定对应的选择时间
 
         } catch (e) {

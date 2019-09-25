@@ -118,6 +118,25 @@ $(function () {
     });
 
 
+//快速回到顶部功能按钮
+    $("#back2top").click(function () {
+        if ($('html').scrollTop()) {
+            $('html').animate({scrollTop: 0}, 100);//动画效果
+            return false;
+        }
+        $('body').animate({scrollTop: 0}, 100);
+        return false;
+    });
+    //“快速回到顶部”的按钮出现和隐藏
+    $(window).scroll(function () {
+        if ($(window).scrollTop() > 100) {
+            $("#back2top").fadeIn(800);
+        } else {
+            $("#back2top").fadeOut(1000);
+        }
+    });
+
+
 });//end jquery
 
 //为ajax发生请求时写的交互 N个
@@ -210,4 +229,10 @@ function barZero_I() {
         element.progress('demo', '0%');
     });
     $("#layuiBar").fadeOut(1000);
+}
+
+
+//为了解决窗口问题，将开窗抽方法
+function openExplore() {
+
 }

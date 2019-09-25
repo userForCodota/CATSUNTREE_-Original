@@ -5,12 +5,22 @@ $(function () {
         var zTreeObj = $.fn.zTree.getZTreeObj("treemain");
         if (zTreeObj != null) {
             zTreeObj.expandAll(true);//展开全部
+        } else {
+            layui.use('layer', function () {
+                var layer = layui.layer;
+                layer.tips('No trees are being planted ！', '#tree1_ExpandAll');
+            });
         }
     });
     $("#tree1_closeAll").click(function () {
         var zTreeObj = $.fn.zTree.getZTreeObj("treemain");
         if (zTreeObj != null) {
             zTreeObj.expandAll(false);//收起全部
+        } else {
+            layui.use('layer', function () {
+                var layer = layui.layer;
+                layer.tips('No trees are being planted ！', '#tree1_closeAll');
+            });
         }
     });
     $("#tree1_showCid").click(function () {
@@ -31,10 +41,12 @@ $(function () {
             });
             return;
         }
+        $("#zteezoon").show();
         $.fn.zTree.init($("#treemain"), currentMainTreeSetting, JSON.parse(datas.list));//树重新初始化
     });
     $("#tree1_ext4").click(function () {
         $.fn.zTree.destroy("treemain");//销毁 #treemain 的 zTree
+        $("#zteezoon").hide();
     });
 
 });//end jquery

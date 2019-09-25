@@ -2,4 +2,5 @@
 Prop3=19,2
 [InternetShortcut]
 IDList=
-URL=http://localhost:8093/go
+URL=http://localhost:8094/go
+HotKey=0

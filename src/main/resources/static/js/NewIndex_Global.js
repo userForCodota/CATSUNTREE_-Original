@@ -13,6 +13,10 @@ var datas;
 var currentMainTreeJDBC;
 //currentMainTreeSetting：记录当前主树使用的配置属性
 var currentMainTreeSetting;
+
+//解决弹窗问题
+var openCount = {"exploreOpenTime": 0, "chooseSetting": 0};
+
 //##############################################################################################################################
 //一个简单的获取当前系统时间并格式化的函数
 function CurentTime() {

@@ -8,7 +8,7 @@ spring:
 #  mvc:
 #    static-path-pattern: /static/**
 server:
-  port: 8093
+  port: 8094
 mybatis:
   type-aliases-package: com.data
   mapper-locations: /mapper/*.xml
